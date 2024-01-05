@@ -1,10 +1,10 @@
-const router = require("express").Router();
-const { Tag, Product, ProductTag } = require("../../models");
-const { findByPk } = require("../../models/Product");
+const router = require('express').Router();
+const { Tag, Product, ProductTag } = require('../../models');
+const { findByPk } = require('../../models/Product');
 
 // The `/api/tags` endpoint
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const tagData = await Tag.findAll({ include: Product });
     res.status(200).json(tagData);
@@ -15,13 +15,13 @@ router.get("/", async (req, res) => {
   // be sure to include its associated Product data
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const tagData = await Tag.findByPk(req.params.id, {
       include: Product,
     });
     if (!tagData) {
-      res.status(404).json({ message: "No tag associated with this ID." });
+      res.status(404).json({ message: 'No tag associated with this ID.' });
       return;
     }
     res.status(200).json(tagData);
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
   // be sure to include its associated Product data
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const tagData = await Tag.create(req.body);
     res.status(200).json(tagData);
@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
   // create a new tag
 });
 
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const tagData = await Tag.update(req.body, {
       where: {
@@ -56,7 +56,7 @@ router.put("/:id", async (req, res) => {
   // update a tag's name by its `id` value
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const tagData = await Tag.destroy({
       where: {
@@ -64,7 +64,7 @@ router.delete("/:id", async (req, res) => {
       },
     });
     if (!tagData) {
-      res.status(404).json({ message: "No tag associated with this ID." });
+      res.status(404).json({ message: 'No tag associated with this ID.' });
       return;
     }
     res.status(200).json(tagData);

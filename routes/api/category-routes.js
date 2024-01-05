@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const { Category, Product } = require("../../models");
+const router = require('express').Router();
+const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const catData = await Category.findAll({ include: Product });
     res.status(200).json(catData);
@@ -12,13 +12,13 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const catData = await Category.findByPk(req.params.id, {
       include: Product,
     });
     if (!catData) {
-      res.status(404).json({ message: "No category associated with this ID." });
+      res.status(404).json({ message: 'No category associated with this ID.' });
       return;
     }
     res.status(200).json(catData);
@@ -27,7 +27,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const catData = await Category.create(req.body);
     res.status(200).json(catData);
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const catData = await Category.update(req.body, {
       where: {
@@ -49,7 +49,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const catData = await Category.destroy({
       where: {
@@ -57,7 +57,7 @@ router.delete("/:id", async (req, res) => {
       },
     });
     if (!catData) {
-      res.status(404).json({ message: "No category associated with this ID." });
+      res.status(404).json({ message: 'No category associated with this ID.' });
       return;
     }
     res.status(200).json(catData);
