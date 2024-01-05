@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
       include: Product,
     });
     if (!catData) {
-      res.status(404).json({ message: "No category associated to this ID." });
+      res.status(404).json({ message: "No category associated with this ID." });
       return;
     }
     res.status(200).json(catData);
@@ -51,13 +51,13 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const catData = await Category.destroy(req.body, {
+    const catData = await Category.destroy({
       where: {
         id: req.params.id,
       },
     });
     if (!catData) {
-      res.status(404).json({ message: "No category associated to this ID." });
+      res.status(404).json({ message: "No category associated with this ID." });
       return;
     }
     res.status(200).json(catData);
